@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import breweries from '../data/breweries';
-import beers from '../data/beers';
+import Menu from './Menu';
 
 import {GoogleApiWrapper} from 'google-maps-react';	
 let apiKey = 'AIzaSyBrPSAnaWrGd2kJJzN6d29ETwL03-B7iCI';
@@ -29,12 +29,12 @@ class SearchContainer extends Component{
 					},
 					day = this.days[new Date().getDay()],
 					distance = [];
-				breweries.map((b, i) => {
-					if(b.open.includes(day)){
-						options.destinations.push(b.address+', '+b.zipcode+', '+b.city);
-						distance.push(b);
+				for(let i=0; i < breweries.length; i++){
+					if(breweries[i].open.includes(day)){
+						options.destinations.push(breweries[i].address+', '+breweries[i].zipcode+', '+breweries[i].city);
+						distance.push(breweries[i]);
 					}
-				});
+				}
 				Service.getDistanceMatrix(options, (res, status) => {
 					if(status === 'OK'){
 						let sts = true;
@@ -87,7 +87,7 @@ class SearchContainer extends Component{
 					<article className="result-box">
 						{this.state.locales.map((obj, index) => (
 							<div className="result-set" key={index}>
-			            		<img src={imgURL + index} />
+			            		<img alt={"beer van" + obj.name} src={imgURL + index} />
 			            		<h1>{obj.name}</h1>
 			            		<div className="address">
 			            			<p>{obj.address}</p>
@@ -102,6 +102,7 @@ class SearchContainer extends Component{
 			                		</ul>
 			              		</div>
 			              		<p>See Menu</p>
+				              	<Menu name={obj.name} />	
 			            	</div>
 						))}
 		        	</article>

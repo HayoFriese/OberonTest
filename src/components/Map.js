@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import breweries from '../data/breweries';
 // Import all Google Maps Stuff
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';	
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';	
 import Geocode from 'react-geocode';
 // Set the apiKey.
 let apiKey = 'AIzaSyBrPSAnaWrGd2kJJzN6d29ETwL03-B7iCI';
@@ -26,9 +26,9 @@ class MapContainer extends Component {
 		// Initialize marker array where promises will be stored
 		this.marker = [];
 		// Loop through each brewery
-		breweries.map((b, i) => {
+		for(let i = 0; i < breweries.length; i++){
 			// Reformat address to conform to the Geocode API standards
-			let address = b.address.replace(" ","+") + ',+'+b.zipcode.replace(" ","+")+',+'+b.city.replace(" ","+");
+			let address = breweries[i].address.replace(" ","+") + ',+'+breweries[i].zipcode.replace(" ","+")+',+'+breweries[i].city.replace(" ","+");
 			// Fetch the Geocoded lat longs from the above address
 			this.marker[i] = Geocode.fromAddress(address)
 				// On success, return the lat and long values
@@ -40,7 +40,7 @@ class MapContainer extends Component {
 				.catch(err => {
 					this.setState({error: err});
 				});
-		});
+		}
 	}
 
 	/**
