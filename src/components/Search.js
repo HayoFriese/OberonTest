@@ -134,21 +134,28 @@ class SearchContainer extends Component{
 						{this.state.locales.map((obj, index) => (
 							<div className="result-set" key={index}>
 			            		<img alt={"beer van" + obj.name} src={imgURL + index} />
-			            		<h1>{obj.name}</h1>
-			            		<div className="address">
-			            			<p>{obj.address}</p>
-			                		<p>{obj.zipcode}, {obj.city}</p>
-			              		</div>
-			              		<div className="opening">
-			                		<h2>Open On</h2>
-			                		<ul>
-										{obj.open.map((day, num) => (
-											<li key={num}>{day}</li>
-										))}
-			                		</ul>
-			              		</div>
-			              		<p>See Menu</p>
-				              	<Menu name={obj.name} />	
+			            		<div className="result-info">
+				            		<h1>{obj.name}</h1>
+				            		<div className="flex">
+					            		<div className="address">
+					            			<p>{obj.address}</p>
+					                		<p>{obj.zipcode}, {obj.city}</p>
+					                		<p>Distance: {obj.distance.text}</p>
+					                		<p>Duration: {obj.duration.text}</p>
+					              		</div>
+					              		<div className="opening">
+					                		<h2>Open On</h2>
+					                		<ul>
+												{obj.open.map((day, num) => (
+													<li key={num}>{day}</li>
+												))}
+					                		</ul>
+					              		</div>
+					              	</div>
+					              	<hr />
+				              		<h3>Menu</h3>
+					              	<Menu name={obj.name} />
+					            </div>	
 			            	</div>
 						))}
 		        	</article>

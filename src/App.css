@@ -7,7 +7,6 @@
   color: red;
   margin-bottom: 5px;
 }
-
 .map-wrapper{
   position: relative;
   height: 100vh;
@@ -20,6 +19,7 @@
     bottom: 0;
     left: 0;
   }
+
 .data-wrapper{
   width: 300px;
   position: absolute;
@@ -53,4 +53,39 @@
       width: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+    .result-info{
+      padding: 5px 16px;
+    }
+    .result-info hr{
+      margin: 15px 0;
+    }
+    .result-info h1{
+      margin-bottom: 5px;
+    }
+    .flex{
+      display: flex;
+      justify-content: space-between;
+    }
+    .address p{
+      margin: 0;
+      font-size: 0.8em;
+      font-style: italic;
+      color: #A09F9F;
+    }
+    .opening{
+      padding: 0 5px;
+    }
+    .opening h2{
+      margin: 0;
+      margin-bottom: 5px;
+      font-size: 1em;
+      font-weight: normal; 
+    }
+    .opening ul{
+      margin: 0;
+      padding: 0;
+      font-size: 0.8em;
+      list-style:  none;
+      color: #555555;
     }
