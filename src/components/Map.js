@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+// Load in the breweries locally. Has to be local since API URLs provided in the assignment don't have CORS settings implemented
 import breweries from '../data/breweries';
-// Import all Google Maps Stuff
+// Import all Google Maps API services
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';	
 import Geocode from 'react-geocode';
-// Set the apiKey.
+// Set the apiKey globally. Has to be global for the export initialization, and for use within the class without duplicating.
 let apiKey = 'AIzaSyBrPSAnaWrGd2kJJzN6d29ETwL03-B7iCI';
 
 class MapContainer extends Component {
 	/**
-	 * Constructor o f class Map
+	 * Constructor of class Map
 	 */
 	constructor(props){
 		// initialize parent
 		super(props);
+		// Initialize the Geocoder service
 		Geocode.setApiKey(apiKey);
 		// Initialise the state
 		this.state = {
@@ -47,8 +49,11 @@ class MapContainer extends Component {
 	 * Constant that holds the map information
 	 */
 	componentDidMount(){
+		// Once the map has been added to the client, resolve the marker data
 		Promise.all(this.marker)
+			// Loop through each marker and set the markerList as the marker promise results
 			.then(markerList => {
+				// Toggle state change to initialize rendering with marker data
 				this.setState({
 					markers: markerList
 				})
@@ -57,6 +62,7 @@ class MapContainer extends Component {
 
 	/**
 	 * Function to render the Map view
+	 * Markers initialized in constructor as empty to prevent crashes. Markers don't render until data is returned.
 	*/
 	render(){
 		return (
@@ -76,6 +82,7 @@ class MapContainer extends Component {
 		)
 	}
 }
+// Export the google maps API with the key
 export default GoogleApiWrapper({
 	apiKey: apiKey
 })(MapContainer);
