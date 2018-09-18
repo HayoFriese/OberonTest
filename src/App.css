@@ -2,6 +2,11 @@
   height: 100%;
   position: relative;
 }
+.error{
+  font-size: 0.7em;
+  color: red;
+  margin-bottom: 5px;
+}
 
 .map-wrapper{
   position: relative;
@@ -42,4 +47,10 @@
     background-color: white;
     max-height: calc(100% - 125px);
     overflow: auto;
-  }
+    }
+    .result-set img{
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
